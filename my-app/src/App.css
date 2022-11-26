@@ -14,9 +14,15 @@
   opacity: 90%;}
 
    #top-line {
+    width: 600px;
     margin-left: 12px;
     margin-right: 12px;
   }
+  .searchForPlace {
+    display: flex !important;
+    flex-direction: column;
+  }
+
   .form-control {
     width: 330px !important;
     height: 40px;
