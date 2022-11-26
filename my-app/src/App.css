@@ -1,11 +1,54 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.App {
+  font-family: "Montserrat", sans-serif;
+  opacity: 90%;
+  
+
 }
+.Weather {
+  width: 600px;
+  border-radius: 30px;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  font-family: "Montserrat", sans-serif;
+  opacity: 90%;}
+
+   #top-line {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+  .form-control {
+    width: 330px !important;
+    height: 40px;
+    margin-top: 5px !important;
+    font-style: italic;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+  #submitSearch {
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
+    background-color: #73abb7;
+    color: #fdfcfb;
+    border-radius: 5px;
+    border-color: #73abb7;
+    margin-top: 5px;
+    }
+
+    #submitSearch:hover {
+      cursor: pointer;
+      border-width: 3px;
+    }
+
+    .dayTemp {
+      text-align: center;
+      width: 600px;
+    }
+    td {
+      width: 140px;
+    }
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
