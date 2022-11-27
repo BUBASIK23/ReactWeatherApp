@@ -2,20 +2,50 @@ import './App.css';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "../node_modules/bootstrap/dist/js/bootstrap.min.js"
 import axios from "axios";
+import React, {useState} from "react";
+
 
 function App() {
-  
-  return (
+  let [temp,setTemp]=useState(null);
+  let [city,setCity]=useState("");
+
+    function showTemp(response) {setTemp({
+      temp: Math.round(response.data.main.temp),
+      humidity: response.data.main.humidity,
+      description: response.data.weather[0].description,
+      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`  
+    });
+    console.log(response.data);
+    //this console is to look real weather data in console
+  }
+
+  let apiKey = "3403a0d9be1275191d4d17e1391e7b13";
+  let units = "metric"
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q="Kyiv"/&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(showTemp);
+
+function searchPlace (event) {
+  event.preventDefault();
+  alert (`Search for ${city}`);
+}
+
+function updateCity (event) {
+  setCity (event.target.value);
+}
+
+
+  if (temp) {
+   return (
   <div className="Weather">
         <div className="row" id="top-line">
       <div className="col-7">
-        <form className="otherPlace" id="searchForPlace">
-          <input type="search" placeholder="Type other place"  className="form-control"/>
+        <form className="otherPlace" id="searchForPlace" >
+          <input type="search" placeholder="Type other place"  className="form-control" onSubmit={searchPlace}/>
         </form>
       </div>
       <div className="col-2">
-      <form className="SubmitSearch">
-      <input type="submit" className="btn" value="Search" id="submitSearch"/>
+      <form className="SubmitSearch" >
+      <input type="submit" className="btn" value="Search" id="submitSearch" onClick={updateCity}/>
       </form>
       </div>
     </div>
@@ -48,7 +78,7 @@ function App() {
               <span className="col-3" id="metrics">°C</span>
             </div>
             <div className="col-6" id="image">
-              <img  width="110px" className="iconMain" id="icon" />
+              <img  width="110px" className="iconMain" id="icon" alt="{temp.description}"/>
             </div>
           <div id="description"></div>
         </div>
@@ -76,7 +106,7 @@ function App() {
 
 
   </div>
-  );
+  );}
 }
 
 export default App;
