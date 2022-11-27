@@ -5,11 +5,14 @@ import axios from "axios";
 import React, {useState} from "react";
 
 
-function App() {
+export default function App() {
   let [temp,setTemp]=useState(null);
   let [city,setCity]=useState("");
 
-    function showTemp(response) {setTemp({
+    
+  
+  
+  function showTemp(response) {setTemp({
       temp: Math.round(response.data.main.temp),
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
@@ -19,14 +22,14 @@ function App() {
     //this console is to look real weather data in console
   }
 
+  
+
+function handleSubmit (event) {
+  event.preventDefault();
   let apiKey = "3403a0d9be1275191d4d17e1391e7b13";
   let units = "metric"
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q="Kyiv"/&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showTemp);
-
-function searchPlace (event) {
-  event.preventDefault();
-  alert (`Search for ${city}`);
 }
 
 function updateCity (event) {
@@ -40,12 +43,12 @@ function updateCity (event) {
         <div className="row" id="top-line">
       <div className="col-7">
         <form className="otherPlace" id="searchForPlace" >
-          <input type="search" placeholder="Type other place"  className="form-control" onSubmit={searchPlace}/>
+          <input type="search" placeholder="Type other place"  className="form-control" onSubmit={updateCity}/>
         </form>
       </div>
       <div className="col-2">
       <form className="SubmitSearch" >
-      <input type="submit" className="btn" value="Search" id="submitSearch" onClick={updateCity}/>
+      <input type="submit" className="btn" value="Search" id="submitSearch" onClick={handleSubmit}/>
       </form>
       </div>
     </div>
@@ -54,6 +57,7 @@ function updateCity (event) {
   <div className="row">
     <div className="col-5">
       <div className="place">
+        <strong>{city}</strong>
         <div className="row">
           <div className="col-6" id="searchedPlace"></div>
         </div>
@@ -109,4 +113,4 @@ function updateCity (event) {
   );}
 }
 
-export default App;
+
